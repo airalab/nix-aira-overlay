@@ -1,0 +1,13 @@
+diff --git a/dji_sdk/msg/MissionWaypointTask.msg b/dji_sdk/msg/MissionWaypointTask.msg
+index 60fcf9f..cc4c3cb 100644
+--- a/dji_sdk/msg/MissionWaypointTask.msg
++++ b/dji_sdk/msg/MissionWaypointTask.msg
+@@ -3,7 +3,7 @@ uint8 FINISH_NO_ACTION       = 0  # no action
+ uint8 FINISH_RETURN_TO_HOME  = 1  # return to home
+ uint8 FINISH_AUTO_LANDING    = 2  # auto landing
+ uint8 FINISH_RETURN_TO_POINT = 3  # return to point 0
+-uint8 FINISH_NO_EXIT         = 4  # infinite mode， no exit
++uint8 FINISH_NO_EXIT         = 4  # infinite mode, no exit
+ 
+ # constant for yaw_mode
+ uint8 YAW_MODE_AUTO     = 0       # auto mode (point to next waypoint)

@@ -34,5 +34,7 @@ self: super:
   sen0233_sensor_agent = super.callPackage ./applications/science/robotics/aira/sen0233_sensor_agent { };
   sensors-connectivity = super.callPackage ./applications/science/robotics/aira/sensors-connectivity { };
   substrate_sensor_demo = super.callPackage ./applications/science/robotics/aira/substrate_sensor_demo {  };
+
+  robonomics-bin = super.callPackage ./applications/blockchains/robonomics { };
 }     
 

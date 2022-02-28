@@ -9,7 +9,7 @@
   nix = {
     # Disable sandbox by default
     # https://github.com/airalab/aira/issues/67 
-    useSandbox = false;
+    settings.sandbox = false;
 
     binaryCaches = [
       https://cache.nixos.org
@@ -28,6 +28,7 @@
     # Enable IPFS network
     ipfs = {
       enable = true;
+      package = pkgs.ipfs_0_9_0;
       extraFlags = [ "--enable-namesys-pubsub" ];
       extraConfig = {
         Bootstrap = [

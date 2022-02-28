@@ -36,5 +36,6 @@ self: super:
   substrate_sensor_demo = super.callPackage ./applications/science/robotics/aira/substrate_sensor_demo {  };
 
   robonomics-bin = super.callPackage ./applications/blockchains/robonomics { };
+  ipfs_0_9_0 = super.callPackage pkgs/applications/networking/ipfs { };
 }     
 

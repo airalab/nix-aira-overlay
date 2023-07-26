@@ -1,5 +1,6 @@
 { ... }: {
   imports = [
+    ./services/network-filesystems/ipfs.nix
     ./services/networking/websocket-star.nix
     ./services/networking/webrtc-star.nix
     ./services/robonomics/ipfs-subscriber.nix

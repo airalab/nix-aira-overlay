@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
 
@@ -9,19 +9,19 @@
   nix = {
     # Disable sandbox by default
     # https://github.com/airalab/aira/issues/67 
-    settings.sandbox = false;
-
-    binaryCaches = [
-      https://cache.nixos.org
-      https://aira.cachix.org
-      https://ros.cachix.org
-    ];
-
-    binaryCachePublicKeys = [
-      "aira.cachix.org-1:/5nHPqhVrtvt7KCk04I8cH/jETANk8BtPHWsEtcwU/M="
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" 
-      "ros.cachix.org-1:dSyZxI8geDCJrwgvCOHDoAfOm5sV1wCPjBkKL+38Rvo="
-    ];
+    settings = {
+      sandbox = false;
+      substituters = [
+        https://cache.nixos.org
+        https://aira.cachix.org
+        https://ros.cachix.org
+      ];
+      trusted-public-keys = [
+        "aira.cachix.org-1:/5nHPqhVrtvt7KCk04I8cH/jETANk8BtPHWsEtcwU/M="
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" 
+        "ros.cachix.org-1:dSyZxI8geDCJrwgvCOHDoAfOm5sV1wCPjBkKL+38Rvo="
+      ];
+    };
   };
 
   services = {
@@ -62,7 +62,7 @@
     # Enable IPv6 yggdrasil mesh network
     yggdrasil = { 
       enable = true;
-      config = {
+      settings = {
         Peers = [
           "tcp://1.ams.nl.y.fftlt.net:21285"
           "tcp://1.msk.ru.y.fftlt.net:21285"

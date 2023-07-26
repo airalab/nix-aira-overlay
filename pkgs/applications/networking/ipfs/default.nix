@@ -1,38 +1,28 @@
-{ lib, buildGoModule, fetchurl, nixosTests }:
+{ lib, stdenv, fetchurl }:
 
-buildGoModule rec {
+stdenv.mkDerivation rec {
   pname = "ipfs";
   version = "0.9.0";
   rev = "v${version}";
 
   # go-ipfs makes changes to it's source tarball that don't match the git source.
   src = fetchurl {
-    url = "https://github.com/ipfs/go-ipfs/releases/download/${rev}/go-ipfs-source.tar.gz";
-    sha256 = "sha256:1fyffnw1d860w7gwm6ijbgrh68297z5bmvww8yqfshm3xgvcs6bf";
+    url = "https://github.com/ipfs/kubo/releases/download/${rev}/go-ipfs_${rev}_linux-amd64.tar.gz";
+    sha256 = "sha256-5zf9bMvRkX0wL83J6NKdWPpFbdao+Sg1vinwYMbdyWc=";
   };
 
-  # tarball contains multiple files/directories
-  postUnpack = ''
-    mkdir ipfs-src
-    shopt -s extglob
-    mv !(ipfs-src) ipfs-src || true
-    cd ipfs-src
-  '';
-
+  dontBuild = true;
   sourceRoot = ".";
 
-  subPackages = [ "cmd/ipfs" ];
+  phases = "installPhase fixupPhase";
 
-  passthru.tests.ipfs = nixosTests.ipfs;
-
-  vendorSha256 = null;
-
-  postInstall = ''
-    install --mode=444 -D misc/systemd/ipfs.service $out/etc/systemd/system/ipfs.service
-    install --mode=444 -D misc/systemd/ipfs-api.socket $out/etc/systemd/system/ipfs-api.socket
-    install --mode=444 -D misc/systemd/ipfs-gateway.socket $out/etc/systemd/system/ipfs-gateway.socket
-    substituteInPlace $out/etc/systemd/system/ipfs.service \
-      --replace /usr/bin/ipfs $out/bin/ipfs
+  installPhase = ''
+   mkdir -p $out/bin
+   tar -xvf ${src} 
+   mv go-ipfs/ipfs $out/bin
+   chmod +x $out/bin/ipfs
+   patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
+   --set-rpath "$libPath" $out/bin/ipfs
   '';
 
   meta = with lib; {

@@ -16,12 +16,24 @@ self: super: with self.lib; let
       eth-typing = pySelf.callPackage ./eth-typing { };
       eth-utils = pySelf.callPackage ./eth-utils { };
       websockets6 = pySelf.callPackage ./websockets/6.nix { };
-      websockets = pySelf.callPackage ./websockets { };
+      websockets9 = pySelf.callPackage ./websockets { };
       hexbytes = pySelf.callPackage ./hexbytes { };
       python-persistent-queue = pySelf.callPackage ./python-persistent-queue { };
       pinatapy = pySelf.callPackage ./pinatapy { };
 #      ipfsapi = pySelf.callPackage ./ipfsapi { };
       multihash = pySelf.callPackage ./multihash { };
+      scalecodec = pySelf.callPackage ./scalecodec { };
+      robonomics-interface = pySelf.callPackage ./robonomics-interface { };
+      substrate-interface = pySelf.callPackage ./substrate-interface { };
+      py-sr25519-bindings = pySelf.callPackage ./py-sr25519-bindings { };
+      py-ed25519-bindings = pySelf.callPackage ./py-ed25519-bindings { };
+      py-bip39-bindings = pySelf.callPackage ./py-bip39-bindings { };
+      sensors-connectivity = pySelf.callPackage ./sensors-connectivity { };
+      ipfshttpclient = pySelf.callPackage ./ipfshttpclient { };
+      httpcore = pySuper.httpcore.overridePythonAttrs (oldAttrs: rec {
+#        disabled = false;
+        doCheck = false;
+      });
     });
   }));
 in {

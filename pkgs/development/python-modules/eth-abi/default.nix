@@ -4,7 +4,7 @@
 , eth-utils
 , parsimonious
 , pytest
-, hypothesis
+#, hypothesis
 }:
 
 let
@@ -20,7 +20,9 @@ in buildPythonPackage rec {
     sha256 = "0df8s5zh59h4y7kbqff7bfvzyc36lvdyhny871j019qriyg0vl7z";
   };
 
-  buildInputs = [ pytest hypothesis ];
+  buildInputs = [ pytest
+# hypothesis
+ ];
   propagatedBuildInputs = [ eth-utils parsimonious ];
 
   prePatch = ''

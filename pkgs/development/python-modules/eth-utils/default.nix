@@ -1,9 +1,16 @@
-{ lib, fetchFromGitHub, buildPythonPackage, pytestCheckHook, eth-hash, eth-typing,
-  cytoolz, hypothesis }:
+{ lib
+, fetchFromGitHub
+, buildPythonPackage
+, pytestCheckHook
+, eth-hash
+, eth-typing
+, cytoolz
+, hypothesis 
+}:
 
 buildPythonPackage rec {
   pname = "eth-utils";
-  version = "1.10.0";
+  version = "2.0.0";
 
   # Tests are missing from the PyPI source tarball so let's use GitHub
   # https://github.com/ethereum/eth-utils/issues/130
@@ -14,7 +21,9 @@ buildPythonPackage rec {
     sha256 = "sha256-sq3H4HmUFUipqVYleZxWLG1gBsQEoNwcZAXiKckacek=";
   };
 
-  checkInputs = [ pytestCheckHook hypothesis ];
+  checkInputs = [ pytestCheckHook
+ hypothesis
+ ];
   propagatedBuildInputs = [ eth-hash eth-typing cytoolz ];
 
   pythonImportsCheck = [ "eth_utils" ];

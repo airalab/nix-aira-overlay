@@ -1,11 +1,12 @@
 self: super:
 {
 
-  
   robonomics-tools = #broken
     let tools = super.haskellPackages.callPackage ./applications/science/robotics/aira/robonomics-tools.nix { };
     in super.haskell.lib.overrideCabal (super.haskell.lib.justStaticExecutables tools) { };
 
+  libp2p-webrtc-star = super.callPackage ./development/node-packages/libp2p-webrtc-star { };
+  libp2p-webrtc-star-signalling-server = super.callPackage ./development/node-packages/libp2p-webrtc-star-signalling-server { };
 
   dji_sdk = super.callPackage ./development/ros-modules/dji_sdk { };
   djiosdk = super.callPackage ./development/libraries/science/robotics/djiosdk { };

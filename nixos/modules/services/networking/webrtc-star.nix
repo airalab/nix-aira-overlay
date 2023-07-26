@@ -37,7 +37,8 @@ in
         wantedBy = [ "multi-user.target" ];
         serviceConfig = {
           User = "nobody";
-          ExecStart = "${pkgs.nodePackages.libp2p-webrtc-star}/bin/webrtc-star --port ${toString cfg.port}";
+#          ExecStart = "${pkgs.nodePackages.libp2p-webrtc-star}/bin/webrtc-star --port ${toString cfg.port}";
+          ExecStart = "${pkgs.libp2p-webrtc-star-signalling-server}/bin/webrtc-star --port ${toString cfg.port}";
           Restart = "always";
         };
       };
